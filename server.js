@@ -3,12 +3,13 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const routes = require('./routes');
 const cors = require('cors');
-app.use(cors());
+const routes = require('./routes');
+
+
 // Middleware
 app.use(express.json());
-
+app.use(cors());
 // Rutas de la API
 //http://localhost:3000/api/users
 app.use('/api/', routes);
