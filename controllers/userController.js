@@ -1,5 +1,3 @@
-// controllers/userController.js
-
 const connection = require('../db');
 
 // Obtener todos los usuarios
@@ -21,8 +19,8 @@ exports.getUserById = (req, res) => {
 
 // Crear un nuevo usuario
 exports.createUser = (req, res) => {
-  const { nombre, email } = req.body;
-  connection.query('INSERT INTO usuarios (nombre, email) VALUES (?, ?)', [nombre, email], (error, results) => {
+  const { nombre, email, rol } = req.body;
+  connection.query('INSERT INTO usuarios (nombre, email, rol) VALUES (?, ?, ?)', [nombre, email, rol], (error, results) => {
     if (error) throw error;
     res.json({ message: 'Usuario creado correctamente', id: results.insertId });
   });
@@ -31,8 +29,8 @@ exports.createUser = (req, res) => {
 // Actualizar un usuario existente
 exports.updateUser = (req, res) => {
   const { id } = req.params;
-  const { nombre, email } = req.body;
-  connection.query('UPDATE usuarios SET nombre = ?, email = ? WHERE id = ?', [nombre, email, id], (error, results) => {
+  const { nombre, email, rol } = req.body;
+  connection.query('UPDATE usuarios SET nombre = ?, email = ?, rol = ? WHERE id = ?', [nombre, email, rol, id], (error, results) => {
     if (error) throw error;
     res.json({ message: 'Usuario actualizado correctamente' });
   });
